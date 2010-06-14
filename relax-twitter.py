@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #Copyright (c) 2010, Thomas H. Chace
 
-import sys, time, thread
+import sys
 
 # PySide is preferred because it is directly from Nokia,
 # but they aren't as common as PyQt4 - both have the same syntax
@@ -14,11 +14,6 @@ except:
     from PyQt4.QtCore import *
     from PyQt4.QtGui import *
     from PyQt4.QtWebKit import *
-
-
-def bash(c):
-    return subprocess.Popen(c, shell=True, stdout=subprocess.PIPE).stdout.read().strip()
-
 
 class Twitter:
     def __init__(self):
@@ -59,11 +54,11 @@ class Twitter:
         self.layout = QVBoxLayout(self.widget)
         self.layout.setMargin(0)
 
-        self.layout.addWidget(self.webkit)
-        self.layout.addWidget(self.tbar)
-
         self.progress = QProgressBar()
         self.progress.setTextVisible(False)
+
+        self.layout.addWidget(self.webkit)
+        self.layout.addWidget(self.tbar)
         self.layout.addWidget(self.progress)
 
         self.webpage.setLinkDelegationPolicy(QWebPage.DelegateAllLinks)
@@ -74,14 +69,11 @@ class Twitter:
         QObject.connect(self.actionForward, SIGNAL("triggered()"), self.webkit, SLOT("forward()")) # Goes next upon clicking next
         QObject.connect(self.actionHome, SIGNAL("triggered()"), self.goHome) # Goes back to twitter
         QObject.connect(self.actionReload, SIGNAL("triggered()"), self.webkit, SLOT("reload()")) # Reloads web page upon hitting reload
-
-        #QObject.connect(self.webkit, SIGNAL("linkClicked (const QUrl&)"), self.linkClicked)
         QObject.connect(self.webkit, SIGNAL("urlChanged (const QUrl&)"), self.urlChanged)
         QObject.connect(self.webkit, SIGNAL("loadProgress (int)"), self.loadProgress) # Tracks progress for progressbar
 
     def urlChanged(self, const):
         url = const.toString()
-        #print url
         url = str(url)
         if url.index("twitter.com"):
             pass
