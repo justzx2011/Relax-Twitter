@@ -1,0 +1,15 @@
+Name: Relax Twitter
+Author: Thomas H. Chace <ithomashc@gmail.com>
+Version: 0.1.0
+Description: A simple, yet powerful twitter client written in Python, QT 4 and WebKit.A simple, yet powerful twitter client written in Python, QT 4 and WebKit.
+Website: http://github.com/thomashc/Relax-Twitter
+
+Copyright (c) 2010, Thomas H. Chace
+See LICENSE for license information.
+
+Requirements:
+*PySide or PyQt4
+*Qt 4.4
+*Python 2.5
+
+Report bugs to <ithomashc@gmail.com>
